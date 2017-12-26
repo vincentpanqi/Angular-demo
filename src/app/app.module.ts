@@ -12,12 +12,10 @@ import { routes } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
 
 import { PreloadSelectedModules } from './shared/service/preview-load';
-import { 404.htmlComponent } from '.d:/per/Angular-demo/src/404.html/404.html.component';
 
 @NgModule({
   declarations: [
-    AppComponent,,
-    404.htmlComponent
+    AppComponent
 ],
   imports: [
     BrowserModule,
