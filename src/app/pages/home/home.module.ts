@@ -1,3 +1,11 @@
+/***
+ * 此为首页的模块
+ * 
+ * 
+ * 
+ * 
+ * */ 
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

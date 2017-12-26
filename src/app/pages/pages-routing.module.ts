@@ -18,15 +18,20 @@ const routes: Routes = [
         loadChildren: 'app/pages/home/home.module#HomeModule'
       },
       {
-        path: '**',
-        redirectTo: 'home'
+        path: 'routes', // routes
+        loadChildren: 'app/pages/routes/routes.module#RoutesModule'
       },
+      // {
+      //   path: '**',
+      //   redirectTo: 'home'
+      // },
     ]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  declarations: [PagesComponent]
 })
 export class PagesRoutingModule { }
