@@ -16,7 +16,11 @@ const routes: Routes = [
       {
         path: 'home', // home
         loadChildren: 'app/pages/home/home.module#HomeModule'
-      }
+      },
+      {
+        path: '**',
+        redirectTo: 'home'
+      },
     ]
   }
 ];

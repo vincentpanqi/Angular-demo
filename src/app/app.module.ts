@@ -6,8 +6,8 @@ import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-// import { AppRoutingModule } from './app-routing.module';
-import { routes } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
+// import { routes } from './app-routing.module';
 
 import { PagesModule } from './pages/pages.module';
 
@@ -21,9 +21,9 @@ import { PreloadSelectedModules } from './shared/service/preview-load';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    // AppRoutingModule,
-    PagesModule,
-    RouterModule.forRoot(routes, { preloadingStrategy:  PreloadSelectedModules }),
+    AppRoutingModule,
+    PagesModule
+    // RouterModule.forRoot(routes, { preloadingStrategy:  PreloadSelectedModules }),
   ],
   providers: [
     PreloadSelectedModules
