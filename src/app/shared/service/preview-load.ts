@@ -1,8 +1,25 @@
 import { Observable } from 'rxjs/Rx';
 import { PreloadingStrategy, Route } from '@angular/router';
+import { Injectable, NgZone } from '@angular/core';
 
-export class PreloadSelectedModules implements PreloadingStrategy {
-    preload(route: Route, fn: () => Observable<boolean>): Observable<boolean> {
-        return Observable.of(true).delay(5000).flatMap((_: boolean) => fn());
-    }
+export function requestIdle(zone: NgZone) {
+  const win: any = window;
+  if (win.requestIdleCallback) {
+    return (fn) => win.requestIdleCallback(fn);
+  }
+  return (fn) => zone.runOutsideAngular(() => win.setTimeout(fn, 10));
+}
+
+@Injectable()
+export class PreloadService implements PreloadingStrategy {
+
+  constructor(
+    private zone: NgZone
+  ) { }
+
+  preload(route: Route, fn: () => Observable<any>): Observable<any> {
+    requestIdle(this.zone)(fn);
+    return Observable.of(null);
+  }
+
 }

@@ -4,14 +4,10 @@ import { Http, XHRBackend, RequestOptions, HttpModule, JsonpModule } from '@angu
 import { Router, RouterModule } from '@angular/router';
 
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { HttpInterceptorService } from './service/http-interceptor';
 
 import { HeaderComponent, FooterComponent, NgContentComponent } from './components/index';
 
-export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router) {
-  let service = new HttpInterceptorService(xhrBackend, requestOptions, router);
-  return service;
-}
+
 
 const SHARED_COMPONENTS = [
   HeaderComponent,
@@ -30,12 +26,7 @@ const SHARED_COMPONENTS = [
      ...SHARED_COMPONENTS
   ],
   providers: [
-    HttpInterceptorService,
-    {
-      provide: Http,
-      useFactory: interceptorFactory,
-      deps: [XHRBackend, RequestOptions, Router]
-    },
+    
   ],
   exports: [ 
     ...SHARED_COMPONENTS

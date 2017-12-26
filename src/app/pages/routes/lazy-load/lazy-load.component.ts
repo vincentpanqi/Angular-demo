@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: '-lazy-load',
+  selector: 'lazy-load',
   templateUrl: './lazy-load.component.html',
   styleUrls: ['./lazy-load.component.scss']
 })

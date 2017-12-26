@@ -4,14 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-// import { routes } from './app-routing.module';
+import { AppRouting } from './app.routing';
 
 import { PagesModule } from './pages/pages.module';
-
-import { PreloadSelectedModules } from './shared/service/preview-load';
+import { PreloadService } from './shared/service/preview-load';
 
 @NgModule({
   declarations: [
@@ -21,12 +18,11 @@ import { PreloadSelectedModules } from './shared/service/preview-load';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    AppRoutingModule,
-    PagesModule
-    // RouterModule.forRoot(routes, { preloadingStrategy:  PreloadSelectedModules }),
+    PagesModule,
+    RouterModule.forRoot(AppRouting, {useHash: true,  preloadingStrategy:  PreloadService }) // 预加载 1  RouterModule 传入服务
   ],
   providers: [
-    PreloadSelectedModules
+    PreloadService  // 预加载 2 注册服务
   ],
   bootstrap: [AppComponent]
 })

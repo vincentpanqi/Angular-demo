@@ -5,3 +5,6 @@
 # how to run 
 npm run gitee  
 ngh
+
+# 查看方法
+方法都写在 .module.ts文件中，直接找到对应模块的文件进行方法查看。

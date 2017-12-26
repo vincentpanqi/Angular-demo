@@ -1,7 +1,19 @@
-import { Routes, RouterModule } from '@angular/router';
+/**
+ * 路由配置，显示内容
+ */ 
+import { Routes } from '@angular/router';
 
-const routes: Routes = [
-  {  },
+import { LazyLoadComponent } from './lazy-load.component';
+
+export const LazyLoadRouting: Routes = [
+  {  
+    path: '',
+    component: LazyLoadComponent
+  },
+  {  
+    path: '**',
+    component: LazyLoadComponent
+  }
 ];
 
-export const LazyLoadRoutes = RouterModule.forChild(routes);
+
