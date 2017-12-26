@@ -1,6 +1,6 @@
 {
-  "name": "poetry-life",
-  "version": "0.0.0",
+  "name": "Angular-demo",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "gitee" : "ng build --prod --aot --base-href",
