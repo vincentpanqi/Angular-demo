@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
+
+import { AuthorizationService } from '../../../shared/service/authorization.service';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-signin',
@@ -7,9 +17,60 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+  validateForm: FormGroup;
+
+  _submitForm() {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+    }
+    this.signin(this.validateForm.value)
+  }
+
+  signin(userInfo) {
+    this.signCheck(userInfo);
+    if(this.roleInfo.role == false){
+      this.createNotification('error', '登录失败', '用户名或密码错误！');
+    }else{
+      this.authService.saveAccount(this.roleInfo);
+      this.router.navigateByUrl('/routes/canvisit'); // 路由跳转写上父级一层
+    }
+  }
+
+  roleInfo: any;
+  signCheck(userInfo) {
+    let userName = userInfo.userName;
+    if (userName == 'admin') {
+      this.setRoleInfo('admin');
+    } else if (userName == 'user') {
+      this.setRoleInfo('user');
+    } else {
+      this.setRoleInfo(false);
+    }
+  }
+
+  setRoleInfo(role) {
+    this.roleInfo = {
+      role: role
+    }
+  }
+
+  signout(){
+    this.authService.removeAccount();
+    this.createNotification('success', '成功', '已清除');
+  }
+  constructor(private fb: FormBuilder, private authService: AuthorizationService, private _notification: NzNotificationService,   private router: Router,) { }
 
   ngOnInit() {
+    this.validateForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true],
+    });
   }
+
+  createNotification = (type, tit, content) => {
+    this._notification.create(type, tit, content);
+  };
+
 
 }

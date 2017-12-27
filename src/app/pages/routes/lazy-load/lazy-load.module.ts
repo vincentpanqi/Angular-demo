@@ -21,7 +21,7 @@ export class LazyLoadModule { }
 
 /**
  * 
- * 懒加载模块：
+ * 懒加载模块检测方法：
  * 
  * 1. 进入其他的路由
  * 2. 谷歌浏览器 network点击js，先清空

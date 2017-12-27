@@ -1,3 +1,39 @@
-<p>
-  signin works!
-</p>
+
+  <div [routerLink]="['/routes/canvisit/anybody']"> 不登录，往任何人都可以访问的地址跳，对应地址  routes/canvisit/anybody </div>
+  <div> 登录后的地址</div>
+  <div [routerLink]="['/routes/canvisit/admin']">管理员的地址： routes/canvisit/admin</div>
+  <div [routerLink]="['/routes/canvisit/user']">普通用户的的地址： routes/canvisit/user</div>
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="_submitForm()">
+  <div nz-form-item>
+    <div nz-form-control>
+      <nz-input formControlName="userName" [nzPlaceHolder]="'Username'" [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-user"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">Please input your username!</div>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control>
+      <nz-input formControlName="password" [nzType]="'password'" [nzPlaceHolder]="'Password'" [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-lock"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">Please input your Password!</div>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control>
+      <label nz-checkbox formControlName="remember">
+        <span>Remember me</span>
+      </label>
+      <a class="login-form-forgot" class="login-form-forgot">Forgot password</a>
+      <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'">Log in</button>
+      Or
+      <a href="">register now!</a>
+    </div>
+  </div>
+</form>
+<div nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'small'" (click)='signout()' style='width: 200px;line-height: 20px;'>退出，清除登录信息</div>

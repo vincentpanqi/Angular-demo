@@ -21,7 +21,7 @@ export class PreviewLoadModule { }
 
 /**
  * 
- * 预加载模块：
+ * 预加载模块检测方法：
  * 
  * 1. 把 ../routes,routing.ts文件中 34 行false改成true
  * 2. 谷歌浏览器 network点击js，先清空
