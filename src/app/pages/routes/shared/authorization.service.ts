@@ -28,8 +28,6 @@ export class AuthorizationService {
         return this._currentUser = currentUser ? currentUser.role : null;
     }
 
-
-
     saveAccount(meta: any): boolean {
         sessionStorage.setItem(sessionStroageKey, JSON.stringify(meta));
         return true;
@@ -38,7 +36,7 @@ export class AuthorizationService {
     removeAccount(): boolean {
         sessionStorage.removeItem(sessionStroageKey);
         return true;
-    }
+    }   
 
 
 

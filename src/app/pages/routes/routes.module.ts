@@ -55,6 +55,8 @@ export class RoutesModule { }
 /******************************************************************************************************************************************************************\
  *  
  *  此为路由模块，包括的功能：
+ *  
+ *     * 下面介绍的 service 或 provider 都放在 routes 目录下的 shared 文件夹下，且都在routes.module.ts里面注册。
  * 
  *  1. 模块懒加载
  *         原理：点击到哪个模块才加载哪个模块的js文件。 
@@ -74,16 +76,17 @@ export class RoutesModule { }
  *         原理： 只有登录或相应权限的用户才可以访问某个url，否则会拦截。
  *         实现方法&位置：
  *            不登录不给访问uri
- *               [routerLink]="['/routes/canvisit/admin']" : 顶级路由开始写。
- *               0) 模拟登录并存用户信息，供后面验证用。 ervice ： shared/service/authorization.provider.ts
+ *               [routerLink]="['/routes/guard/admin']" : 顶级路由开始写。
+ *               0) 模拟登录并存用户信息，供后面验证用。 authorization.provider.ts
  *               1) 新建任何人、user、admin 可以访问的组件 
- *               2) 定义预加载 service ： shared/service/can-visit.provider.ts , 抛出 CanVisitProvide，在module里面注册且抛出。
- *               3) 在 can-visit文件夹下的 can-visit.routing.ts文件 29-34行配置路由守卫信息。
- *           管理员才可以访问的uri
- * 
- * 
- * 
- * 
+ *               2) 定义登录、admin访问限制文件 can-signin-visit.provider,ts 和 can-admin-visit.provider.ts文件。
+ *               3) 在 guard 文件夹下的 guard.routing.ts文件 27-32行配置登录方可访问 和 34-38行admin方可访问的路由守卫。
+ *               4）账号密码： 普通用户      账号： user     密码： 123   
+ *                            admin               admin          123 
+ *               5) 对应的情况： 
+ *                   i. 未登录访问 user和admin提示权限不足，可以访问  /routes/guard/anybody 但无法访问 /routes/guard/user 和 /admin
+ *                   ii. 登录user可以访问 /routes/guard/anybody 和 /user 但是无法访问 .admin
+ *                   iii. 登录admin全都可以访问
  * 
  * 实现原理？
  *     源码解读（待续）。
