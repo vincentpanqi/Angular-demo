@@ -6,9 +6,9 @@ import { AuthorizationService } from './authorization.service';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Injectable()
-export class CanVisitProvide implements CanActivate, CanLoad  {
+export class CanSigninVisitProvide implements CanActivate, CanLoad  {
 
-    constructor(private AuthSrv: AuthorizationService, private msg: NzMessageService) {}
+    constructor(private AuthSrv: AuthorizationService, private msg: NzMessageService, ) {}
 
     check(): Observable<boolean> {
         return new Observable((observer) => {
@@ -20,12 +20,14 @@ export class CanVisitProvide implements CanActivate, CanLoad  {
             this.msg.error('权限不足');
             observer.next(false);
             observer.complete();
+           
         });
     }
 
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+        // console.log("路由配置",route.routeConfig.canActivate[1],'路由配置中的定义', state.root)
         return this.check();
     }
 

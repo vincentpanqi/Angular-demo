@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
-import { AuthorizationService } from '../../../shared/service/authorization.service';
+import { AuthorizationService } from '../shared/authorization.service';
 import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({

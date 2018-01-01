@@ -5,15 +5,29 @@
  * Author: deepthan
  * Author URI: https://github.com/deepthan
 */
-import {  RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { SharedModule } from '../../shared/shared.module';
 import { RoutesRouting } from './routes.routing';
 import { RoutesComponent } from './routes.component';
 import { SigninComponent } from './signin/signin.component';
+
+import  { CanSigninVisitProvide, PreloadService, AuthorizationService } from './shared/index'
+
+const ROUTES_COMPONENT = [
+  RoutesComponent,
+  SigninComponent
+]
+
+const ROUTES_PROVIDERS = [
+  PreloadService,
+  AuthorizationService,
+  CanSigninVisitProvide,
+]
 
 @NgModule({
   imports: [
@@ -21,11 +35,14 @@ import { SigninComponent } from './signin/signin.component';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    NgZorroAntdModule,
     RouterModule.forChild(RoutesRouting),
   ],
   declarations: [
-    RoutesComponent,
-    SigninComponent
+    ...ROUTES_COMPONENT
+  ],
+  providers: [
+    ...ROUTES_PROVIDERS
   ]
  
 })
@@ -50,7 +67,7 @@ export class RoutesModule { }
  *         实现方法&位置：
  *            1) 定义预加载 service ： shared/service/preview-load.ts , 抛出 PreloadService。
  *            2) 在app.module.ts里面注册此服务。因为RouterModule.forRoot()可传入路由、指令和服务参数，但RouterModule.forChild()却只接收路由、指令，不可传入服务。
- *            3) 服务注册好了，在路由里面直接用 ./routes.routing.ts的 34 行进行预加载设置。
+ *            3) 服务注册好了，在路由里面直接用 ./routes.routing.ts的 34 行进行预加载设置,默认全局开始预加载，如若不想预加载则设置 preload : false 即可。
  * 
  * 
  *  3. 路由守卫：

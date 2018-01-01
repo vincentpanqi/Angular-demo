@@ -4,8 +4,6 @@ import { Http, XHRBackend, RequestOptions, HttpModule, JsonpModule } from '@angu
 import { Router, RouterModule } from '@angular/router';
 
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { AuthorizationService } from './service/authorization.service';
-import { CanVisitProvide } from './service/can-visit.provider';
 
 import { HeaderComponent, FooterComponent, NgContentComponent } from './components/index';
 
@@ -15,27 +13,19 @@ const SHARED_COMPONENTS = [
   NgContentComponent
 ]
 
-const SHARED_SERVICE = [
-  AuthorizationService,
-  CanVisitProvide
-]
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    NgZorroAntdModule,
-    HttpModule
+    HttpModule,
+    NgZorroAntdModule
   ],
   declarations: [ // 先声明
      ...SHARED_COMPONENTS
   ],
-  providers: [
-    ...SHARED_SERVICE
-  ],
   exports: [ 
-    ...SHARED_COMPONENTS,
-    NgZorroAntdModule
+    ...SHARED_COMPONENTS
   ]
 })
 

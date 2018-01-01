@@ -1,16 +1,17 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { CanVisitProvide } from './../../../shared/service/can-visit.provider';
+import { CanSigninVisitProvide } from './../shared/can-signin-visit.provider';
 
-import { CanVisitComponent } from './can-visit.component';
+import { GuardComponent } from './guard.component';
 import { CanAdminVisitComponent } from './can-admin-visit/can-admin-visit.component';
 import { CanUserVisitComponent } from './can-user-visit/can-user-visit.component';
 import { CanAnybodyVisitComponent } from './can-anybody-visit/can-anybody-visit.component';
+import { ROLE_INFO } from './../../../shared/service/static-role-info.providers';
 
-export const CanVisitRoutes: Routes = [
+export const GuardRoutes: Routes = [
   {  
     path: '',
-    component: CanVisitComponent,
+    component: GuardComponent,
     children: [
       {
         path: '',
@@ -24,13 +25,15 @@ export const CanVisitRoutes: Routes = [
       },
       {
         path: 'admin',
-        component: CanAdminVisitComponent
+        component: CanAdminVisitComponent,
+        // canActivate: [ CanVisitProvide, ROLE_INFO.prototype.ADMIN ],
+        canLoad: [ CanSigninVisitProvide ]
       },
       {
         path: 'user',
         component: CanUserVisitComponent,
-        canActivate: [ CanVisitProvide ],
-        canLoad: [ CanVisitProvide ]
+        canActivate: [ CanSigninVisitProvide ],
+        canLoad: [ CanSigninVisitProvide ]
       }
     ]
   }

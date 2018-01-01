@@ -34,14 +34,14 @@ export const RoutesRouting: Routes = [
         data: { preload: false }  // true表示要启用预加载， false表示禁用预加载，这里禁用了可以改成true查看效果。
       },
       {
-        path: 'canvisit', // 路由守卫模块
-        loadChildren: './can-visit/can-visit.module#CanVisitModule'
+        path: 'guard', // 路由守卫模块
+        loadChildren: './guard/guard.module#GuardModule'
       },
       {
         path: '**',
         redirectTo: 'signin'
       }
     ]
-   },
+   }
 ];
 

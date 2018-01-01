@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 const sessionStroageKey = "currentUser";
 
 @Injectable()
-export class AuthorizationService {
+export class AuthorizationService  {
 
     constructor(private http: Http, private route: Router) { }
 
@@ -19,10 +19,13 @@ export class AuthorizationService {
         return true;
     }
 
-    public isLogin(): boolean {
-        let currentUser = this.getCurrentUser();
-        console.log("currentUser",currentUser)
-        return currentUser;
+    public isLogin(role?): boolean {
+        let currentUser = this.getCurrentUser() ?  this.getCurrentUser().role : null;
+        console.log("currentUser",currentUser,'role',role)
+        return  role? 
+                role === currentUser ? true :  false 
+                :
+                currentUser
     }
 
     public getCurrentUser(): any {

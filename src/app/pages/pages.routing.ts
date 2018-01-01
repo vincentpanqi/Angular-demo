@@ -19,7 +19,7 @@ export const PagesRouting: Routes = [
       },
       {
         path: 'routes', // routes模块，包含懒加载、预加载、路由守卫、离开提示、阻止懒加载、阻止预加载
-        loadChildren: 'app/pages/routes/routes.module#RoutesModule'
+        loadChildren: 'app/pages/routes/routes.module#RoutesModule',
       }
     ]
   }
