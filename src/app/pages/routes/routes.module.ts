@@ -15,8 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { RoutesRouting } from './routes.routing';
 import { RoutesComponent } from './routes.component';
 import { SigninComponent } from './signin/signin.component';
-
-import  { CanSigninVisitProvide, PreloadService, AuthorizationService } from './shared/index'
+import  { CanSigninVisitProvide, PreloadService, AuthorizationService, CanAdminVisitProvide } from './shared/index'
 
 const ROUTES_COMPONENT = [
   RoutesComponent,
@@ -27,6 +26,7 @@ const ROUTES_PROVIDERS = [
   PreloadService,
   AuthorizationService,
   CanSigninVisitProvide,
+  CanAdminVisitProvide
 ]
 
 @NgModule({

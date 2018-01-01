@@ -26,17 +26,20 @@ export class SigninComponent implements OnInit {
     this.signin(this.validateForm.value)
   }
 
+  roleInfo: any;
+
   signin(userInfo) {
     this.signCheck(userInfo);
-    if(this.roleInfo.role == false){
+    if (this.roleInfo.role == false) {
       this.createNotification('error', '登录失败', '用户名或密码错误！');
-    }else{
+    } else {
       this.authService.saveAccount(this.roleInfo);
-      this.router.navigateByUrl('/routes/canvisit'); // 路由跳转写上父级一层
+      this.router.navigateByUrl('/routes/guard'); // 路由跳转写上父级一层
+      this.createNotification('success', '恭喜', '登录成功');
     }
   }
 
-  roleInfo: any;
+
   signCheck(userInfo) {
     let userName = userInfo.userName;
     if (userName == 'admin') {
@@ -54,11 +57,11 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  signout(){
+  signout() {
     this.authService.removeAccount();
     this.createNotification('success', '成功', '已清除');
   }
-  constructor(private fb: FormBuilder, private authService: AuthorizationService, private _notification: NzNotificationService,   private router: Router,) { }
+  constructor(private fb: FormBuilder, private authService: AuthorizationService, private _notification: NzNotificationService, private router: Router, ) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({

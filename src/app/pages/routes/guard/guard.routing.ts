@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { CanSigninVisitProvide } from './../shared/can-signin-visit.provider';
+import { CanAdminVisitProvide } from './../shared/can-admin-visit.provider';
 
 import { GuardComponent } from './guard.component';
 import { CanAdminVisitComponent } from './can-admin-visit/can-admin-visit.component';
@@ -26,8 +27,8 @@ export const GuardRoutes: Routes = [
       {
         path: 'admin',
         component: CanAdminVisitComponent,
-        // canActivate: [ CanVisitProvide, ROLE_INFO.prototype.ADMIN ],
-        canLoad: [ CanSigninVisitProvide ]
+        canActivate: [ CanAdminVisitProvide ],
+        canLoad: [ CanAdminVisitProvide ]
       },
       {
         path: 'user',

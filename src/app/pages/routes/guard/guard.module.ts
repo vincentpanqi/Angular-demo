@@ -8,8 +8,6 @@ import { CanAdminVisitComponent } from './can-admin-visit/can-admin-visit.compon
 import { CanUserVisitComponent } from './can-user-visit/can-user-visit.component';
 import { CanAnybodyVisitComponent } from './can-anybody-visit/can-anybody-visit.component';
 
-import { ROLE_INFO } from './../../../shared/service/static-role-info.providers';
-
 const GUARD_COMPONENT = [
   GuardComponent,
   CanAdminVisitComponent,
