@@ -1,3 +1,4 @@
+import { CanLeaveProvide } from './../shared/can-leave.provider';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CanSigninVisitProvide } from './../shared/can-signin-visit.provider';
@@ -7,7 +8,8 @@ import { GuardComponent } from './guard.component';
 import { CanAdminVisitComponent } from './can-admin-visit/can-admin-visit.component';
 import { CanUserVisitComponent } from './can-user-visit/can-user-visit.component';
 import { CanAnybodyVisitComponent } from './can-anybody-visit/can-anybody-visit.component';
-import { ROLE_INFO } from './../../../shared/service/static-role-info.providers';
+import { LeaveAuthorizationComponent } from './leave-authorization/leave-authorization.component';
+
 
 export const GuardRoutes: Routes = [
   {  
@@ -35,6 +37,11 @@ export const GuardRoutes: Routes = [
         component: CanUserVisitComponent,
         canActivate: [ CanSigninVisitProvide ],
         canLoad: [ CanSigninVisitProvide ]
+      },
+      {
+        path: 'leave',
+        component: LeaveAuthorizationComponent,
+        canDeactivate: [ CanLeaveProvide]
       }
     ]
   }

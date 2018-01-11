@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
@@ -30,16 +26,15 @@ export class SigninComponent implements OnInit {
 
   signin(userInfo) {
     this.signCheck(userInfo);
-    if (this.roleInfo.role == false) {
-      this.createNotification('error', '登录失败', '用户名或密码错误！');
-    } else {
+    if (this.roleInfo.role) {
       this.authService.saveAccount(this.roleInfo);
-      this.router.navigateByUrl('/routes/guard'); // 路由跳转写上父级一层
+      this.router.navigateByUrl('/routes/guard'); 
       this.createNotification('success', '恭喜', '登录成功');
+    } else {
+      this.createNotification('error', '登录失败', '用户名或密码错误！');
     }
   }
-
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
   signCheck(userInfo) {
     let userName = userInfo.userName;
     if (userName == 'admin') {
@@ -61,7 +56,9 @@ export class SigninComponent implements OnInit {
     this.authService.removeAccount();
     this.createNotification('success', '成功', '已清除');
   }
-  constructor(private fb: FormBuilder, private authService: AuthorizationService, private _notification: NzNotificationService, private router: Router, ) { }
+
+  constructor(private fb: FormBuilder, private authService: AuthorizationService, private _notification: NzNotificationService, private router: Router ) { }
+
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -69,7 +66,14 @@ export class SigninComponent implements OnInit {
       password: [null, [Validators.required]],
       remember: [true],
     });
+  
   }
+
+  // private userName : string = '';
+  // ngOnChanges(){
+  //   this.userName = this.authService.getCurrentUser();
+  //   console.log("userName",this.userName);
+  // }
 
   createNotification = (type, tit, content) => {
     this._notification.create(type, tit, content);

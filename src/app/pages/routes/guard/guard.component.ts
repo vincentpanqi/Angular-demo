@@ -11,5 +11,6 @@ export class GuardComponent implements OnInit {
 
   ngOnInit() {
   }
+  
 
 }
