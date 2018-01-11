@@ -13,3 +13,4 @@ export class HomeComponent implements OnInit {
   }
 
 }
+//  首页添加动画、轮播图等。
