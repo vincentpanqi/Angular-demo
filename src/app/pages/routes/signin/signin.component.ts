@@ -57,8 +57,11 @@ export class SigninComponent implements OnInit {
     this.createNotification('success', '成功', '已清除');
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthorizationService, private _notification: NzNotificationService, private router: Router ) { }
-
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthorizationService,
+    private _notification: NzNotificationService,
+    private router: Router ) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
